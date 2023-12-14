@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask-mongo : Weeboverse</title>
+</head>
+<body>
+    <h1>Flask-mongo : Weeboverse</h1>
+    <hr>
+    {% for figurine in figurine %}
+    <form action="{{url_for('commitUpdate', id=figurine['_id'])}}" method="post">
+        <p>
+            <b><label for="content">figurines content</label></b>
+        </p>
+        <p>
+            <input type="text" name="nom" value="{{figurine['nom']}}"/>
+            <input type="text" name="prix" value="{{figurine['prix']}}"/>
+            <input type="text" name="serie" value="{{figurine['reference']['serie']}}"/>
+            <input type="text" name="personnages" value="{{figurine['reference']['personnages']}}"/>
+            <input type="text" name="taille" value="{{figurine['taille']}}"/>
+            {% if figurine['matiere'] == Résine%}
+                <div>
+                    <p><label for="matiere">matiére de la figurine</label></p>
+                    <input type="radio" name="matiere" id="matiere-0" required  checked value="Résine"/>
+                    <label for="matiere-0">Résine</label>
+                    <input type="radio" name="matiere" id="matiere-1" required value="PVC"/>
+                    <label for="matiere-1">PVC</label>
+                    <input type="radio" name="matiere" id="matiere-2" required value="Résine/PVC"/>
+                    <label for="matiere-2">Résine/PVC</label>
+                </div>
+            {% elif figurine['matiere'] == PVC %}
+                <div>
+                    <p><label for="matiere">matiére de la figurine</label></p>
+                    <input type="radio" name="matiere" id="matiere-0" required value="Résine"/>
+                    <label for="matiere-0">Résine</label>
+                    <input type="radio" name="matiere" id="matiere-1" required checked value="PVC"/>
+                    <label for="matiere-1">PVC</label>
+                    <input type="radio" name="matiere" id="matiere-2" required value="Résine/PVC"/>
+                    <label for="matiere-2">Résine/PVC</label>
+                </div>
+            {% else %}
+                <div>
+                    <p><label for="matiere">matiére de la figurine</label></p>
+                    <input type="radio" name="matiere" id="matiere-0" required value="Résine"/>
+                    <label for="matiere-0">Résine</label>
+                    <input type="radio" name="matiere" id="matiere-1" required value="PVC"/>
+                    <label for="matiere-1">PVC</label>
+                    <input type="radio" name="matiere" id="matiere-2" required checked value="Résine/PVC"/>
+                    <label for="matiere-2">Résine/PVC</label>
+                </div>
+            {% endif %}
+            <input type="text" name="editeur" value="{{figurine['editeur']}}"/>
+            <input type="text" name="nbEnStock" value="{{figurine['nbEnStock']}}"/>
+            <input type="date" name="dateDeSortie" value="{{figurine['dateDeSortie']}}"/>
+        </p>
+        <button type="submit">Submit</button>
+    </form>
+    {% endfor %}
+    <a href="{{url_for('index')}}">retour page d'acceuil</a>
+</body>
+</html>
