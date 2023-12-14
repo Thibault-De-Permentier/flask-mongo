@@ -12,35 +12,23 @@
     </style>
 </head>
 <body>
-    <h1>FlaskTODO</h1>
+    <h1>Flask-mongo</h1>
     <hr>
     <div class="content">
     <form method="post">
         <p>
-            <b><label for="content">Todo content</label></b>
+            <b><label for="content">figurines content</label></b>
         </p>
         <p>
-            <input type="text" name="content"
-                placeholder="Todo Content"></input>
-        </p>
-
-        <p>
-            <b><label for="degree">Degree</label></b>
-        </p>
-        <p>
-            <input id="degree-0" name="degree" required type="radio" value="Important">
-            <label for="degree-0">Important</label>
-        </p>
-        <p>
-            <input id="degree-1" name="degree" required type="radio" value="Unimportant">
-            <label for="degree-1">Unimportant</label>
+            <input type="text" name="nom"
+                placeholder="nom figurines"></input>
         </p>
         <button type="submit">Submit</button>
     </form>
     <hr>
-    {% for todo in todos %}
+    {% for figurine in figurines %}
         <div class="todo">
-            <p>{{ todo['content'] }} <i>({{ todo['degree']}})</i></p>
+            <p>{{ figurine['nom'] }}</p>
         </div>
     {% endfor %}
 
