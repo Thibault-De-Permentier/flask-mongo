@@ -26,12 +26,11 @@
         <button type="submit">Submit</button>
     </form>
     <hr>
+    <ul>
     {% for figurine in figurines %}
-        <div class="todo">
-            <p>{{ figurine['nom'] }}</p>
-        </div>
+        <li>{{ figurine['nom'] }} : {{figurine['prix']}}</li>
     {% endfor %}
-
+    </ul>
     </div>
 </body>
 </html>
