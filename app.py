@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -17,18 +18,36 @@ def index():
 
 @app.route("/create", methods=['POST'])
 def create():
-    figurines.insert_one({'content': content, 'degree': degree})
+    nom = request.form['nom'] 
+    prix = request.form['prix']
+    serie = request.form['serie']
+    personnages = request.form['personnages'].split("/")
+    taille = request.form['taille']
+    matiere = request.form['matiere']
+    editeur = request.form['editeur']
+    nbEnStock = request.form['nbEnStock']
+    dateDeSortie = request.form['dateDeSortie']
+    figurines.insert_one({'nom': nom,
+                          'prix': float(prix),
+                          'reference.serie':serie,
+                          'reference.personnages':personnages,
+                          'taille':int(taille),
+                          'matiere':matiere,
+                          'nbEnStock':int(nbEnStock),
+                          'dateDeSortie': datetime.strptime(dateDeSortie, "%Y-%m-%d")})
     return redirect(url_for('index'))
 
 @app.route("/<id>/read", methods=['GET'])
-def read():
-    return "<p>Hello, World!</p>"
+def read(id):
+    figurine = figurine.find({"_id": ObjectId(id)})
+    return render_template('read.html', figurine=figurine)
+
 
 @app.route("/<id>/update", methods=['POST','PATCH','PUT'])
-def update():
+def update(id):
     return redirect(url_for('index'))
 
 @app.route("/<id>/delete", methods=['POST','DELETE'])
-def delete():
+def delete(id):
     figurines.delete_one({"_id": ObjectId(id)})
     return redirect(url_for('index'))

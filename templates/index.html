@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>FlaskApp</title>
+    <title>Flask-mongo : Weeboverse</title>
     <style>
         .todo {
             padding: 20px;
@@ -12,23 +12,49 @@
     </style>
 </head>
 <body>
-    <h1>Flask-mongo</h1>
+    <h1>Flask-mongo : Weeboverse</h1>
     <hr>
     <div class="content">
-    <form method="post">
+    <form action="/create" method="post">
         <p>
             <b><label for="content">figurines content</label></b>
         </p>
         <p>
-            <input type="text" name="nom"
-                placeholder="nom figurines"></input>
+            <input type="text" name="nom" placeholder="nom figurine"/>
+            <input type="text" name="prix" placeholder="prix figurine"/>
+            <input type="text" name="serie" placeholder="serie figurine"/>
+            <input type="text" name="personnages" placeholder="personnages figurine - separé par des /"/>
+            <input type="text" name="taille" placeholder="taille figurine"/>
+            <div>
+                <p><label for="matiere">matiére de la figurine</label></p>
+                <input type="radio" name="matiere" id="matiere-0" required value="Résine"/>
+                <label for="matiere-0">Résine</label>
+                <input type="radio" name="matiere" id="matiere-1" required value="PVC"/>
+                <label for="matiere-1">PVC</label>
+                <input type="radio" name="matiere" id="matiere-2" required value="Résine/PVC"/>
+                <label for="matiere-2">Résine/PVC</label>
+            </div>
+            <input type="text" name="editeur" placeholder="editeur figurine"/>
+            <input type="text" name="nbEnStock" placeholder="nombre en stock figurine"/>
+            <input type="date" name="dateDeSortie" placeholder="date de sortie figurine"/>
         </p>
         <button type="submit">Submit</button>
     </form>
     <hr>
     <ul>
     {% for figurine in figurines %}
-        <li>{{ figurine['nom'] }} : {{figurine['prix']}}</li>
+        <li>
+            <div>
+                {{ figurine['nom'] }} : {{figurine['prix']}}
+            </div>
+            <div>
+                <form method="POST" action="{{ url_for('delete', id=figurine['_id']) }}" >
+                    <input type="submit" value="Delete figurine"
+                           onclick="return confirm('Are you sure you want to delete this entry?')">
+                </form>
+                
+            </div>
+        </li>
     {% endfor %}
     </ul>
     </div>

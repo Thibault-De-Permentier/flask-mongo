@@ -106,7 +106,7 @@ var figurines = [{
     },
     {
         "nom":"Yu-Gi-Oh! - Statue Yami Yugi & Slifer Le Dragon Céleste", 
-        "prix":799.00, 
+        "prix":799.10, 
         "reference":{
             "serie":"Yu-Gi-Oh!",
             "personnages":["Yami Yugi", "Slifer"] 
@@ -144,7 +144,7 @@ var figurines = [{
         "dateDeSortie": new Date("2023-12-14")
     },
     {
-        "nom":"My Hero Academia - Figurine Izuku Midoriya Vs Muscular S-Fire "serie"s", 
+        "nom":"My Hero Academia - Figurine Izuku Midoriya Vs Muscular S-Fire series", 
         "prix":649.90, 
         "reference":{
             "serie":"My Hero Academia",
@@ -153,7 +153,7 @@ var figurines = [{
         "taille":30, 
         "matiere":"PVC",
         "editeur":"Takara Tomy",
-        "version":"S-Fire "serie"s", 
+        "version":"S-Fire series", 
         "nbEnStock":80,
         "dateDeSortie": new Date("2023-12-14")
     },
