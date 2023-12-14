@@ -39,7 +39,7 @@ def create():
 
 @app.route("/<id>/read", methods=['GET'])
 def read(id):
-    figurine = figurine.find({"_id": ObjectId(id)})
+    figurine = figurines.find({"_id": ObjectId(id)})
     return render_template('read.html', figurine=figurine)
 
 

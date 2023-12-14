@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask-mongo : Weeboverse</title>
+</head>
+<body>
+    <h1>Flask-mongo : Weeboverse</h1>
+    <hr>
+    {% for figurine in figurine %}
+    <div class="content">
+        <p> nom : {{figurine['nom']}} </p>
+        <p> prix : {{figurine['prix']}} euro</p>
+        <p> serie : {{figurine['reference']['serie']}} </p>
+        <p> personnages : {{figurine['reference']['personnages']}} </p>
+        <p> taille : {{figurine['taille']}} cm </p>
+        <p> matiere : {{figurine['matiere']}} </p>
+        <p> editeur : {{figurine['editeur']}} </p>
+        {% if figurine['version']%}
+            <p> version : {{figurine['version']}} </p>
+        {% endif %}
+        <p> nombre en stock : {{figurine['nbEnStock']}} </p>
+        <p> date de sortie : {{figurine['dateDeSortie']}} </p>
+    </div>
+    {% endfor %}
+    <a href="{{url_for('index')}}">retour page d'acceuil</a>
+</body>
+</html>
