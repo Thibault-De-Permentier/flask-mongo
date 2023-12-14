@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect,jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -39,8 +39,13 @@ def create():
 
 @app.route("/<id>/read", methods=['GET'])
 def read(id):
-    figurine = figurines.find({"_id": ObjectId(id)})
-    return render_template('read.html', figurine=figurine)
+    print(id)
+    figurine = figurines.find_one({"_id": ObjectId(id)})
+    if figurine:
+        return render_template('read.html', figurine=figurine)
+    else:
+        print("Figurine not found")
+        return 0
 
 
 @app.route("/<id>/update", methods=['POST','PATCH','PUT'])
@@ -51,3 +56,5 @@ def update(id):
 def delete(id):
     figurines.delete_one({"_id": ObjectId(id)})
     return redirect(url_for('index'))
+
+
