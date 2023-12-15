@@ -44,16 +44,22 @@
     <ul>
     {% for figurine in figurines %}
         <li>
+            <form method="POST" action="{{ url_for('read', id=figurine['_id']) }}" >
             <div>
-                {{ figurine['nom'] }} : {{figurine['prix']}}
+                <button>
+                    {{ figurine['nom'] }} : {{figurine['prix']}}
+                </button>
             </div>
             <div>
-                <form method="POST" action="{{url_for('delete', id=figurine['_id'])}}" >
+            </form>
+                <form method="POST" action="{{ url_for('delete', id=figurine['_id']) }}" >
                     <input type="submit" value="Delete figurine"
                            onclick="return confirm('Are you sure you want to delete this entry?')">
                 </form>
+
                 <a href="{{url_for('read', id=figurine['_id'])}}">voir les infos de la figurine</a>
                 <a href="{{url_for('update', id=figurine['_id'])}}">modifier les infos de la figurine</a>
+
             </div>
         </li>
     {% endfor %}
