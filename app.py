@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 from datetime import datetime
 import ast
+import re
 
 app = Flask(__name__)
 
@@ -49,6 +50,36 @@ def read(id):
         return render_template('read.html', figurine=figurine)
     else:
         print("Figurine not found")
+        return 0
+
+@app.route("/result", methods=['POST'])
+def search():
+    nom = request.form['nom']
+    prix = request.form['prix']
+    serie = request.form['serie']
+    taille = request.form['taille']
+    matiere = request.form['matiere']
+    personnage = request.form['personnage']
+   
+    
+    search = {"nom": re.compile(f'.*{nom}.*', re.IGNORECASE)}
+    if prix != "":
+        search["prix"] = float(prix)
+    if serie != "":
+        search["reference.serie"] = re.compile(f'.*{serie}.*', re.IGNORECASE)
+    if taille != "":
+        search["taille"] = int(taille)
+    if personnage != "":
+        search["reference.personnages"] = re.compile(f'.*{personnage}.*', re.IGNORECASE)
+    if matiere != "":
+        search["matiere"] = matiere
+
+    figurine = figurines.find(search)
+
+    if figurine:
+        return render_template('result.html', figurine=figurine)
+    else:
+        print("Figurine not exists")
         return 0
 
 
